@@ -1,0 +1,204 @@
+================================================================================
+ASSESSMENT TASK: LEAD MANAGEMENT SYSTEM (DJANGO REST FRAMEWORK)
+================================================================================
+Individual Project | JWT Authentication | Backend API Development
+
+--------------------------------------------------------------------------------
+1. PROJECT OVERVIEW
+--------------------------------------------------------------------------------
+Develop a Lead Management System using Django and Django REST Framework (DRF). 
+The application should allow users to register, log in, and manage potential 
+customers (leads) through REST APIs.
+
+Each authenticated user should be able to manage their own leads. Users must not 
+be able to access or modify leads created by other users.
+
+--------------------------------------------------------------------------------
+2. TECHNICAL REQUIREMENTS
+--------------------------------------------------------------------------------
+- Python
+- Django
+- Django REST Framework
+- MySQL
+- JWT Authentication using Simple JWT
+- Django ORM
+- Model Serializers
+- APIView or Generic Views
+
+--------------------------------------------------------------------------------
+3. APPLICATION STRUCTURE
+--------------------------------------------------------------------------------
+Create the following Django applications:
+
+App Name      Responsibility
+--------------------------------------------------------------------------------
+accounts      User registration and authentication
+leads         Lead management operations
+
+--------------------------------------------------------------------------------
+4. DATABASE MODELS
+--------------------------------------------------------------------------------
+A. Custom User Model
+Create a custom user model by extending AbstractUser.
+
+Additional field:
+Field        Data Type        Constraints
+--------------------------------------------------------------------------------
+phone        CharField       Unique, required
+
+Use this custom user model for the entire application.
+
+Requirements:
+- Username must be unique.
+- Email must be unique.
+- Phone number must be unique.
+- Password must be securely hashed.
+- Users should be able to register and authenticate.
+
+B. Lead Model
+Create a Lead model with the following fields:
+
+Field          Data Type        Description
+--------------------------------------------------------------------------------
+id             AutoField        Primary key
+name           CharField        Customer name
+email          EmailField       Customer email
+phone          CharField        Customer phone number
+company        CharField        Company name (optional)
+source         CharField        How the lead was generated
+status         CharField        Current lead status
+description    TextField        Additional information (optional)
+created_at     DateTimeField    Automatically records creation time
+updated_at     DateTimeField    Automatically records modification time
+created_by     ForeignKey       Reference to the custom user model
+
+Lead Status Choices:
+- New
+- Contacted
+- Interested
+- Converted
+- Lost
+
+Lead Source Choices:
+- Website
+- Social Media
+- Referral
+- Advertisement
+- Other
+
+--------------------------------------------------------------------------------
+5. FUNCTIONAL REQUIREMENTS
+--------------------------------------------------------------------------------
+Module 1: User Authentication
+Implement the following APIs:
+
+Method    Endpoint                       Description
+--------------------------------------------------------------------------------
+POST      /api/accounts/register/        Register a new user
+POST      /api/accounts/login/           Authenticate user and generate JWT tokens
+POST      /api/accounts/token/refresh/   Refresh access token
+GET       /api/accounts/profile/         Retrieve logged-in user profile
+
+Authentication requirements:
+- Use JWT authentication.
+- Generate access and refresh tokens after successful login.
+- Protected APIs must require a valid access token.
+- Unauthenticated users must not access protected endpoints.
+
+Module 2: Lead Management
+Implement CRUD operations for leads.
+
+Method    Endpoint              Description
+--------------------------------------------------------------------------------
+POST      /api/leads/           Create a new lead
+GET       /api/leads/           List all leads belonging to the logged-in user
+GET       /api/leads/<id>/      Retrieve a specific lead
+PUT       /api/leads/<id>/      Update an existing lead
+PATCH     /api/leads/<id>/      Partially update a lead
+DELETE    /api/leads/<id>/      Delete a lead
+
+--------------------------------------------------------------------------------
+6. IMPORTANT BUSINESS RULES
+--------------------------------------------------------------------------------
+1. A user can create multiple leads.
+2. Every lead must be associated with the user who created it.
+3. Users can only view their own leads.
+4. Users cannot view another user's lead even if they know its ID.
+5. Users cannot change the created_by field through API requests.
+6. Only authenticated users can perform lead management operations.
+7. The system must return appropriate HTTP status codes.
+8. Validate email and phone number fields.
+9. When a lead is deleted, it should not affect other users' leads.
+
+--------------------------------------------------------------------------------
+7. EXPECTED API WORKFLOW
+--------------------------------------------------------------------------------
+1. User Registration: Create an account with username, email, password, and phone.
+2. User Login: Authenticate and receive JWT access and refresh tokens.
+3. Access Protected APIs: Send the access token in the Authorization header.
+4. Manage Leads: Create, retrieve, update, and delete personal leads.
+
+--------------------------------------------------------------------------------
+8. SAMPLE API REQUEST
+--------------------------------------------------------------------------------
+Create Lead
+POST /api/leads/
+
+Headers:
+Authorization: Bearer <access_token>
+Content-Type: application/json
+
+Request Body:
+{
+    "name": "Arun Kumar",
+    "email": "arun@gmail.com",
+    "phone": "9876543210",
+    "company": "ABC Technologies",
+    "source": "Website",
+    "status": "New",
+    "description": "Interested in our services"
+}
+
+Note: The created_by field must be assigned automatically using the authenticated 
+user, not supplied by the client.
+
+--------------------------------------------------------------------------------
+9. ASSESSMENT EVALUATION CRITERIA
+--------------------------------------------------------------------------------
+Evaluation Component                        Marks
+--------------------------------------------------------------------------------
+Custom User Model                           10
+User Registration and Validation            10
+JWT Authentication                          15
+Lead Model and Relationships                10
+Lead CRUD APIs                              20
+User-wise Data Access Restriction           15
+Serializer Validation and Error Handling    10
+API Testing and Code Organization           10
+--------------------------------------------------------------------------------
+Total                                       100
+
+--------------------------------------------------------------------------------
+10. SUBMISSION REQUIREMENTS
+--------------------------------------------------------------------------------
+Students must submit:
+1. Complete Django project source code.
+2. Properly structured Django applications.
+3. Database models and migrations.
+4. API endpoint documentation.
+5. Postman collection or .http file containing API requests.
+6. Screenshots of successful API testing.
+7. GitHub repository link.
+
+================================================================================
+FINAL ASSESSMENT OBJECTIVE:
+Students should demonstrate their ability to develop a complete backend REST API 
+application with custom user authentication, JWT token management, relational 
+database design, CRUD operations, serializer validation, and user-level data 
+security.
+
+IMPORTANT:
+The assessment should be completed independently. Students must be prepared 
+to explain their models, serializers, authentication flow, permissions, and 
+query filtering during the technical viva.
+================================================================================

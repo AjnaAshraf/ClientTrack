@@ -1,0 +1,113 @@
+==========  admin =============
+
+# api call for creating admin 
+
+###
+POST http://127.0.0.1:8000/accounts/admin/
+Content-Type: application/json
+
+{
+    "username":"admin",
+    "email":"admin123@gmail.com",
+    "password":"admin123",
+    "phone":"9056783423"
+}
+
+============  normal User ===================
+
+# api call for creating a normal user
+
+###
+POST http://127.0.0.1:8000/accounts/user/
+Content-Type: application/json
+
+{
+    "username": "ali",
+    "email": "alia@gmail.com",
+    "phone": "9116534500",
+    "password": "aali123"
+}
+
+# =========== JWT Token ==================
+
+# api call for creating jwt token pair
+
+###
+POST http://127.0.0.1:8000/accounts/user/token/
+Content-Type: application/json
+
+{
+    "username": "ali",
+    "password": "aali123"
+
+}
+
+
+# {
+#   "refresh": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc5MzcyMTQ1MSwiaWF0IjoxNzkzNjM1MDUxLCJqdGkiOiJlMGI5NThkNzZkYzk0YzQ0OWE4N2Y4YWMzNDVkYTlkYSIsInVzZXJfaWQiOiIzIn0.1EwaIShN7Ph6d856JyTXjxJprYrN7cWzaApbI1RtZt0",
+#   "access": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzkzNjM1MzUxLCJpYXQiOjE3OTM2MzUwNTEsImp0aSI6ImQ1OWY3MjZhZjNiNDQ5NTA5MmYyMDQ1ZTA1NGIyM2FlIiwidXNlcl9pZCI6IjMifQ.uBYEj27hh9VfSUx0C3Bl_wBTpq6GVN5PQXtX5HrIzzQ"
+# }
+
+#api call for refresh
+
+###
+POST http://127.0.0.1:8000/accounts/user/token/refresh/
+Content-Type: application/json
+
+{
+    "refresh": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc5MzcyMTQ1MSwiaWF0IjoxNzkzNjM1MDUxLCJqdGkiOiJlMGI5NThkNzZkYzk0YzQ0OWE4N2Y4YWMzNDVkYTlkYSIsInVzZXJfaWQiOiIzIn0.1EwaIShN7Ph6d856JyTXjxJprYrN7cWzaApbI1RtZt0"
+}
+
+# api call for creating leads
+
+###
+POST http://127.0.0.1:8000/leads/add/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzkzNjM5Nzk3LCJpYXQiOjE3OTM2Mzk0OTcsImp0aSI6IjJlZjg2OTExNGIxNDQxZDBhMGJhYzliYzk4MTJhY2E2IiwidXNlcl9pZCI6IjQifQ.njV81TBXi0DjLINVnAIDRllDZG4t3JDhtomHUxjtsb4
+
+{
+    "name": "Meera Joseph",
+    "email": "meera@gmail.com",
+    "phone": "9876543215",
+    "company": "Creative Minds",
+    "source": "Other",
+    "status": "Contacted",
+    "description": "Enquired about our services during a business networking event."
+}
+
+
+# api call for listing the leads of a specific user
+
+###
+GET http://127.0.0.1:8000/leads/list/
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzkzNjM5Nzk3LCJpYXQiOjE3OTM2Mzk0OTcsImp0aSI6IjJlZjg2OTExNGIxNDQxZDBhMGJhYzliYzk4MTJhY2E2IiwidXNlcl9pZCI6IjQifQ.njV81TBXi0DjLINVnAIDRllDZG4t3JDhtomHUxjtsb4
+
+
+# api call for listing a particular lead/
+
+###
+GET http://127.0.0.1:8000/leads/modify/2/
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzkzNjQwMTU1LCJpYXQiOjE3OTM2Mzk4NTUsImp0aSI6IjA0NjEyNzU5YTRmMDRhYjQ4NzMxZjZmM2E3YTVkZjhjIiwidXNlcl9pZCI6IjMifQ.BSPV_N9ROGM2rFAAEpwnyTxJ1HPbNtqDa6iECl391bU
+
+### Update a lead
+
+PUT http://127.0.0.1:8000/leads/modify/2/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzkzNjQwMTU1LCJpYXQiOjE3OTM2Mzk4NTUsImp0aSI6IjA0NjEyNzU5YTRmMDRhYjQ4NzMxZjZmM2E3YTVkZjhjIiwidXNlcl9pZCI6IjMifQ.BSPV_N9ROGM2rFAAEpwnyTxJ1HPbNtqDa6iECl391bU
+
+{
+    "name": "Anjali Menon",
+    "email": "anjali@gmail.com",
+    "phone": "9876543211",
+    "company": "Tech Solutions",
+    "source": "Website",
+    "status": "Interested",
+    "description": "Interested in purchasing our services."
+}
+
+### Delete a lead
+DELETE http://127.0.0.1:8000/leads/modify/1/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzkzNjQwMTU1LCJpYXQiOjE3OTM2Mzk4NTUsImp0aSI6IjA0NjEyNzU5YTRmMDRhYjQ4NzMxZjZmM2E3YTVkZjhjIiwidXNlcl9pZCI6IjMifQ.BSPV_N9ROGM2rFAAEpwnyTxJ1HPbNtqDa6iECl391bU
+
